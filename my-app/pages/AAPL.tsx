@@ -4,6 +4,7 @@ import Chart from "chart.js/auto"
 
 type resp = {
     data: {
+        Symbol: string
         Date: string[]
         Predicted_Price: number[]
         Real_Price: number[]
@@ -63,7 +64,7 @@ export default function Home({ data }: resp): React.ReactNode {
             plugins: {
                 title: {
                     display: true,
-                    text: "AAPL closing price predictions",
+                    text: data.Symbol + " closing price predictions",
                 },
             },
             scales: {
@@ -88,8 +89,8 @@ export default function Home({ data }: resp): React.ReactNode {
     })
     return (
         <>
-            <canvas id="AAPLchart">{data.RMSE}</canvas>
-            <p>{data.RMSE}</p>
+            <canvas id="AAPLchart"></canvas>
+            <p>RMSE = {data.RMSE}</p>
         </>
     )
     //
