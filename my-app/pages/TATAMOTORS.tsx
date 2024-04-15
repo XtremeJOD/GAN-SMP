@@ -21,21 +21,20 @@ export default function Home({ data }: resp): React.ReactNode {
     const real_price = data.Real_Price
     let past_predicted_price = data.Previous_Predictions
     const xValues = xValues1.map((x) => x.slice(0, 10))
-    const predicted_price1 = predicted_price.map((x) => {
+    function floatLimiter(x: number): number {
         x = Math.floor(x * 100) / 100
         x.toFixed(2)
         return x
+    }
+    const predicted_price1 = predicted_price.map((x) => {
+        return floatLimiter(x)
     })
     const real_price1 = real_price.map((x) => {
-        x = Math.floor(x * 100) / 100
-        x.toFixed(2)
-        return x
+        return floatLimiter(x)
     })
     past_predicted_price = past_predicted_price.slice(0, -1)
     const past_predicted_price1 = past_predicted_price.map((x) => {
-        x = Math.floor(x * 100) / 100
-        x.toFixed(2)
-        return x
+        return floatLimiter(x)
     })
     function rmse(real_prices: number[], predicted_prices: number[]): number {
         let sum = 0
@@ -117,6 +116,7 @@ export default function Home({ data }: resp): React.ReactNode {
             },
         },
     })
+
     return (
         <>
             <canvas
